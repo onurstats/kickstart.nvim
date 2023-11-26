@@ -103,7 +103,9 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',
+        opts = { notification = { window = { winblend = 0 } } },
+      },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -187,6 +189,7 @@ require('lazy').setup({
         },
         custom_highlights = function(colors)
           return {
+            CursorLine = { bg = "" },
             CursorLineNr = { fg = colors.lavender },
           }
         end
@@ -208,7 +211,10 @@ require('lazy').setup({
       },
       sections = {
         lualine_b = { function()
-          return vim.fn.substitute(vim.fn.getcwd(), '^.*/', '', '')
+          local path = vim.fn.getcwd();
+          if path then
+            return vim.fn.substitute(path, '^.*/', '', '')
+          end
         end, "branch" }
       }
     },
@@ -558,15 +564,39 @@ require('mason-lspconfig').setup()
 --
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
+--
+local eslint = {
+  lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
+  lintStdin = true,
+  lintFormats = { "%f:%l:%c: %m" },
+  lintIgnoreExitCode = true,
+  formatCommand =
+  "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
+  formatStdin = true
+}
+
 local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
+
+  -- Used for eslint_d
+  efm = {
+    languages = {
+      javascript = { eslint },
+      javascriptreact = { eslint },
+      ["javascript.jsx"] = { eslint },
+      typescript = { eslint },
+      ["typescript.tsx"] = { eslint },
+      typescriptreact = { eslint }
+    },
+    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  },
+  jsonls = {},
   cssls = {},
   tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
-
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
