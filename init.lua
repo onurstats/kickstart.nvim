@@ -49,11 +49,11 @@ vim.opt.swapfile = false
 vim.opt.scrolloff = 8
 
 -- UFO folding
-vim.o.foldcolumn = "1" -- '0' is not bad
-vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+-- vim.o.foldcolumn = "1" -- '0' is not bad
+-- vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+-- vim.o.foldlevelstart = 99
+vim.o.foldenable = false
+-- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 vim.o.cursorline = true;
 vim.o.stc = ' %=%{v:relnum?printf("   %s",v:relnum):v:lnum}%=%C%s'
@@ -104,7 +104,7 @@ require('lazy').setup({
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim',
-        opts = { notification = { window = { winblend = 0 } } },
+        opts = { notification = { window = { winblend = 0} } },
       },
 
       -- Additional lua configuration, makes nvim stuff amazing!
