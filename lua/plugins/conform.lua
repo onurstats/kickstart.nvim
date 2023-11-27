@@ -5,7 +5,7 @@ return {
   keys = {
     {
       -- Customize or remove this keymap to your liking
-      "<leader>f",
+      "<leader>fm",
       function()
         require("conform").format({ async = true, lsp_fallback = true })
       end,
@@ -13,9 +13,7 @@ return {
       desc = "Format buffer",
     },
   },
-  -- Everything in opts will be passed to setup()
   opts = {
-    -- Define your formatters
     formatters_by_ft = {
       ["javascript"] = { "prettierd", "prettier" },
       ["javascriptreact"] = { "prettierd", "prettier" },
@@ -33,12 +31,7 @@ return {
       ["markdown"] = { "prettierd", "prettier" },
       ["markdown.mdx"] = { "prettierd", "prettier" },
       ["graphql"] = { "prettierd", "prettier" },
-      ["handlebars"] = { "prettierd", "prettier" }
+      ["handlebars"] = { "prettierd", "prettier" },
     },
-
   },
-  init = function()
-    -- If you want the formatexpr, here is the place to set it
-    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-  end,
 }
