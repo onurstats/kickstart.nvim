@@ -20,7 +20,7 @@ require("lazy").setup({
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
     -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
-    lazy = true,
+    lazy = false,
     -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
     -- have outdated releases, which may break your Neovim install.
     version = false, -- always use the latest git commit
@@ -35,7 +35,7 @@ require("lazy").setup({
         "gzip",
         -- "matchit",
         -- "matchparen",
-        "netrwPlugin",
+        -- "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",
@@ -44,3 +44,16 @@ require("lazy").setup({
     },
   },
 })
+
+-- local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+-- parser_config.bigcommerce = {
+--   install_info = {
+--     url = "~/Projects/@onurstats/tree-sitter-handlebars", -- local path or git repo
+--     files = {"src/parser.c"}, -- note that some parsers also require src/scanner.c or src/scanner.cc
+--     -- optional entries:
+--     branch = "main", -- default branch in case of git repo if different from master
+--     generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+--     requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+--   },
+--   filetype = "bigcommerce", -- if filetype does not match the parser name
+-- }
